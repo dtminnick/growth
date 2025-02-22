@@ -42,8 +42,7 @@ tables <- lapply(1:nrow(input_data), function(i) {
   df <- df[, c("work_type", "completion_type", 
                setdiff(names(df), c("work_type", "completion_type")))]
   
-  
-  df
+  return(df)
   
 })
 
