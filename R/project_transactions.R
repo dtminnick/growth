@@ -39,7 +39,9 @@ tables <- lapply(1:nrow(input_data), function(i) {
   
   df$completion_type <- row$completion_type
   
-  df <- df[, c("work_type", setdiff(names(df), "work_type"))] 
+  df <- df[, c("work_type", "completion_type", 
+               setdiff(names(df), c("work_type", "completion_type")))]
+  
   
   df
   
@@ -70,7 +72,15 @@ summary_data <- all_data %>%
 
 wb <- createWorkbook()
 
+left_align  <- createStyle(halign = "left")
+
+right_align <- createStyle(halign = "right")
+
+center_align <- createStyle(halign = "center")
+
 for (i in 1:length(tables)) {
+  
+  num_rows <- nrow(tables[[i]]) + 1
   
   sheet_name <- paste(tables[[i]][1, "work_type"],
                       tables[[i]][2, "completion_type"],
@@ -80,10 +90,40 @@ for (i in 1:length(tables)) {
   
   writeData(wb, sheet = sheet_name, tables[[i]])
   
+  setColWidths(wb, sheet_name, cols = 1:8, widths = c(20, 20, 20, 20, 20, 20, 20, 20)) 
+  
+  addStyle(wb, sheet_name, 
+           style = left_align,  
+           cols = 1:2, 
+           rows = 1:num_rows, 
+           gridExpand = TRUE)
+  
+  addStyle(wb, 
+           sheet_name, 
+           style = right_align, 
+           cols = 3:8, 
+           rows = 1:num_rows, 
+           gridExpand = TRUE)
+  
 }
 
 addWorksheet(wb, "All Combined")
 
 writeData(wb, "All Combined", summary_data)
+
+setColWidths(wb, "All Combined", cols = 1:6, widths = c(20, 20, 20, 20, 20, 20))
+
+addStyle(wb, "All Combined", 
+         style = left_align,  
+         cols = 1, 
+         rows = 1:num_rows, 
+         gridExpand = TRUE)
+
+addStyle(wb, 
+         "All Combined", 
+         style = right_align, 
+         cols = 2:6, 
+         rows = 1:num_rows, 
+         gridExpand = TRUE)
 
 saveWorkbook(wb, "my_excel_file.xlsx", overwrite = TRUE)
