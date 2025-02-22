@@ -1,7 +1,7 @@
 work_type,completion_type,baseline,growth_rate,shift_rate,work_effort
-Termination,Completed,100000,0.03,0.05,0.133
-Termination,No Process,100000,0.03,0.05,0.067
-Hardship,Completed,80000,0.03,0.05,0.133
-InService,Completed,120000,0.03,0.05,0.133
-Loan,Completed,40000,0.03,0.05,0.133
-Contact Out,Completed,25000,0.03,0.05,0.133
+A,C,100000,0.03,0.05,0.133
+A,N,100000,0.03,0.05,0.067
+B,C,80000,0.03,0.05,0.133
+C,C,120000,0.03,0.05,0.133
+D,C,40000,0.03,0.05,0.133
+E,C,25000,0.03,0.05,0.133

@@ -126,4 +126,4 @@ addStyle(wb,
          rows = 1:num_rows, 
          gridExpand = TRUE)
 
-saveWorkbook(wb, "my_excel_file.xlsx", overwrite = TRUE)
+saveWorkbook(wb, "./output/test_output_file.xlsx", overwrite = TRUE)
