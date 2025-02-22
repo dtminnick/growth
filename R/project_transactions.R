@@ -35,22 +35,30 @@ tables <- lapply(1:nrow(input_data), function(i) {
   
   df <- project_transactions(row$baseline, row$growth_rate, row$shift_rate, row$work_effort, number_weeks = 52)
   
-  df$transaction <- row$transaction
+  df$work_type <- row$work_type
   
-  df <- df[, c("transaction", setdiff(names(df), "transaction"))] 
+  df$completion_type <- row$completion_type
+  
+  df <- df[, c("work_type", setdiff(names(df), "work_type"))] 
   
   df
   
 })
 
 all_data <- bind_rows(tables) %>%
-  select(transaction,
+  select(work_type,
          week,
          transactions_remaining,
          transaction_reduction,
          effort_saved_hours,
          effort_saved_fte,
-         cumulative_fte_saved)
+         cumulative_fte_saved) %>%
+  group_by(work_type, week) %>%
+  summarise(transactions_remaining = sum(transactions_remaining),
+            transaction_reduction = sum(transaction_reduction),
+            effort_saved_hours = sum(effort_saved_hours),
+            effort_saved_fte = sum(effort_saved_fte),
+            cumulative_fte_saved = sum(cumulative_fte_saved))
 
 summary_data <- all_data %>%
   group_by(week) %>%
@@ -64,9 +72,13 @@ wb <- createWorkbook()
 
 for (i in 1:length(tables)) {
   
-  addWorksheet(wb, tables[[i]][1, "transaction"])
+  sheet_name <- paste(tables[[i]][1, "work_type"],
+                      tables[[i]][2, "completion_type"],
+                      sep = "-")
   
-  writeData(wb, sheet = tables[[i]][1, "transaction"], tables[[i]])
+  addWorksheet(wb, sheet_name)
+  
+  writeData(wb, sheet = sheet_name, tables[[i]])
   
 }
 
@@ -75,4 +87,3 @@ addWorksheet(wb, "All Combined")
 writeData(wb, "All Combined", summary_data)
 
 saveWorkbook(wb, "my_excel_file.xlsx", overwrite = TRUE)
-

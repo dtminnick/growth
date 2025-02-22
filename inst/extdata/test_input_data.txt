@@ -1,5 +1,7 @@
-transaction,baseline,growth_rate,shift_rate,work_effort
-Termination,100000,0.03,0.05,0.133
-Hardship,80000,0.03,0.05,0.133
-InService,120000,0.03,0.05,0.133
-Loan,40000,0.03,0.05,0.133
+work_type,completion_type,baseline,growth_rate,shift_rate,work_effort
+Termination,Completed,100000,0.03,0.05,0.133
+Termination,No Process,100000,0.03,0.05,0.067
+Hardship,Completed,80000,0.03,0.05,0.133
+InService,Completed,120000,0.03,0.05,0.133
+Loan,Completed,40000,0.03,0.05,0.133
+Contact Out,Completed,25000,0.03,0.05,0.133
