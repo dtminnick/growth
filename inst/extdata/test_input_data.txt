@@ -1,7 +1,7 @@
-work_type,completion_type,baseline,growth_rate,shift_rate,work_effort
-A,C,100000,0.03,0.05,0.133
-A,N,100000,0.03,0.05,0.067
-B,C,80000,0.03,0.05,0.133
-C,C,120000,0.03,0.05,0.133
-D,C,40000,0.05,0.05,0.133
-E,C,25000,0.10,0.05,0.133
+work_type,completion_type,baseline_manual,baseline_digital,growth_rate,shift_rate,work_effort,number_weeks,start_digital_shift
+A,C,100000,100000,0.03,0.05,0.133,10,0
+A,N,100000,100000,0.03,0.05,0.067,52,0
+B,C,80000,20000,0.03,0.05,0.133,52,0
+C,C,120000,0,0.03,0.05,0.133,52,26
+D,C,40000,0,0.05,0.05,0.133,52,26
+E,C,25000,0,0.10,0.05,0.133,52,26
