@@ -24,7 +24,7 @@ project_transactions <- function(baseline_manual,
   
   digital_transactions <- ifelse(before_shift,
                                  round(baseline_digital * e^(growth_rate * time), 0),
-                                 round(baseline_digital * e^(growth_rate * time) + cumsum(abs(manual_reduction)), 0))
+                                 round(baseline_digital * e^(growth_rate * time) + cumsum(abs(manual_reduction)) * (time >= start_digital_shift), 0))
   
   digital_increase <- c(0, diff(digital_transactions))
   
